@@ -14,6 +14,7 @@ num_unique = (lambda x: (push(x) >>
 def test_num_unique():
   assert num_unique('the second largest ocean is the second largest ocean') == (5,)
 
+dd = defaultdict(lambda: 0)
 word_count = (lambda x: (push(x) >>
                          wdotc('split') >>
                          push(dd) >>
