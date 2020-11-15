@@ -31,7 +31,7 @@ def mk(f):
     split_at = len(args) - num_params
     to_keep, to_pass = args[:split_at], args[split_at:]
     r = f(*to_pass, **kwargs)
-    if isinstance(r, list) or isinstance(r, tuple):
+    if isinstance(r, (list, tuple)):
       return *to_keep, *r
     else:
       return *to_keep, r
