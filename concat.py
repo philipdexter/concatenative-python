@@ -199,7 +199,7 @@ def test_iter():
 
 # example: count the number of unique words in a string
 from collections import defaultdict
-dd = defaultdict(lambda: 0)
+dd = defaultdict(int)
 @mk
 def inc_elem(a, b):
   # TODO cheating a little bit here by using named args, should
