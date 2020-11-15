@@ -100,6 +100,8 @@ class Pipe:
     if isinstance(other, StackFunction):
       self.pipe.append(other)
       return self
+    if callable(other):
+      return self >> mk(other)
     return NotImplemented
 
 def test_pipe():
@@ -125,6 +127,9 @@ def test_pipe():
   pipe = Pipe(mk(len))
   stack = ['abc', 'def']
   assert pipe(*stack) == ('abc', 3)
+
+  pipe = push(5) >> push('abc') >> len >> add
+  assert pipe() == (8,)
 
 def test_pipe_fail():
   import pytest
