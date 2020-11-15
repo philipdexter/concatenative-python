@@ -136,18 +136,19 @@ def dot(attr_string):
   return f
 
 # allow calling functions on the stack
-def call_(*args, **kwargs):
-  rest, f = args[:-1], args[-1]
+@StackFunction
+def call(*args, **kwargs):
+  *rest, f = args
   return mk(f)(*rest)
-call = StackFunction(call_)
+
 # allow calling functions on the stack, and wrap result in a list
-def wcall_(*args, **kwargs):
-  rest, f = args[:-1], args[-1]
+@StackFunction
+def wcall(*args, **kwargs):
+  *rest, f = args
   @wraps(f)
   def g(*args, **kwargs):
     return [f(*args, **kwargs)]
   return mk(g)(*rest)
-wcall = StackFunction(wcall_)
 
 def test_dot_call():
   pipe = push('hi there') >> dot('split') >> call
