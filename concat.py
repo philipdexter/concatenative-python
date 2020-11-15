@@ -121,6 +121,10 @@ def test_pipe():
   pipe = pipe1 >> pipe2
   assert pipe() == (5,)
 
+  pipe = Pipe(mk(len))
+  stack = ['abc', 'def']
+  assert pipe(*stack) == ('abc', 3)
+
 # allow attr ('dot') access to stack items
 def dot(attr_string):
   @mk
