@@ -139,7 +139,7 @@ def dot(attr_string):
     # # another way to write this would be
     # pipe = push(x) >> push(attr_string) >> mk(lambda x, y: getattr(x, y))
     # attr = pipe()[0]
-    if hasattr(attr, '__call__'):
+    if callable(attr):
       return mk(attr)
     else:
       return attr
