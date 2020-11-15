@@ -100,6 +100,7 @@ class Pipe:
     if isinstance(other, StackFunction):
       self.pipe.append(other)
       return self
+    return NotImplemented
 
 def test_pipe():
   pipe = Pipe(add, add)
@@ -124,6 +125,11 @@ def test_pipe():
   pipe = Pipe(mk(len))
   stack = ['abc', 'def']
   assert pipe(*stack) == ('abc', 3)
+
+def test_pipe_fail():
+  import pytest
+  with pytest.raises(TypeError):
+    pipe = push(5) >> push('abc') >> 3 >> add
 
 # allow attr ('dot') access to stack items
 def dot(attr_string):
